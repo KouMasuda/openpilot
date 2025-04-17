@@ -111,11 +111,11 @@ def comment_replay_report(proposed, master, full_logs):
     commit = get_commit()
     files = generate_report(proposed, master, tmp, commit)
 
-    GITHUB.upload_files(DATA_BUCKET, [(x[0], tmp + '/' + x[0]) for x in files])
+    # GITHUB.upload_files(DATA_BUCKET, [(x[0], tmp + '/' + x[0]) for x in files])
 
     log_name = get_log_fn(TEST_ROUTE, commit)
     save_log(log_name, full_logs)
-    GITHUB.upload_file(DATA_BUCKET, os.path.basename(log_name), log_name)
+    # GITHUB.upload_file(DATA_BUCKET, os.path.basename(log_name), log_name)
 
     diff_files = [x for x in files if not x[1]]
     link = GITHUB.get_bucket_link(DATA_BUCKET)
@@ -298,13 +298,13 @@ if __name__ == "__main__":
       failed = True
 
   # upload new refs
-  if update and not PC:
-    print("Uploading new refs")
-    log_fn = get_log_fn(TEST_ROUTE)
-    save_log(log_fn, log_msgs)
-    try:
-      GITHUB.upload_file(MODEL_REPLAY_BUCKET, os.path.basename(log_fn), log_fn)
-    except Exception as e:
-      print("failed to upload", e)
+  # if update and not PC:
+  #   print("Uploading new refs")
+  #   log_fn = get_log_fn(TEST_ROUTE)
+  #   save_log(log_fn, log_msgs)
+  #   try:
+  #     GITHUB.upload_file(MODEL_REPLAY_BUCKET, os.path.basename(log_fn), log_fn)
+  #   except Exception as e:
+  #     print("failed to upload", e)
 
   sys.exit(int(failed))

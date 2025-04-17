@@ -87,57 +87,57 @@ class Uploader:
     self.immediate_folders = ["crash/", "boot/"]
     self.immediate_priority = {"qlog": 0, "qlog.zst": 0, "qcamera.ts": 1}
 
-  def list_upload_files(self, metered: bool) -> Iterator[tuple[str, str, str]]:
-    r = self.params.get("AthenadRecentlyViewedRoutes", encoding="utf8")
-    requested_routes = [] if r is None else r.split(",")
+  # def list_upload_files(self, metered: bool) -> Iterator[tuple[str, str, str]]:
+  #   r = self.params.get("AthenadRecentlyViewedRoutes", encoding="utf8")
+  #   requested_routes = [] if r is None else r.split(",")
 
-    for logdir in listdir_by_creation(self.root):
-      path = os.path.join(self.root, logdir)
-      try:
-        names = os.listdir(path)
-      except OSError:
-        continue
+  #   for logdir in listdir_by_creation(self.root):
+  #     path = os.path.join(self.root, logdir)
+  #     try:
+  #       names = os.listdir(path)
+  #     except OSError:
+  #       continue
 
-      if any(name.endswith(".lock") for name in names):
-        continue
+  #     if any(name.endswith(".lock") for name in names):
+  #       continue
 
-      for name in sorted(names, key=lambda n: self.immediate_priority.get(n, 1000)):
-        key = os.path.join(logdir, name)
-        fn = os.path.join(path, name)
-        # skip files already uploaded
-        try:
-          ctime = os.path.getctime(fn)
-          is_uploaded = getxattr(fn, UPLOAD_ATTR_NAME) == UPLOAD_ATTR_VALUE
-        except OSError:
-          cloudlog.event("uploader_getxattr_failed", key=key, fn=fn)
-          # deleter could have deleted, so skip
-          continue
-        if is_uploaded:
-          continue
+  #     for name in sorted(names, key=lambda n: self.immediate_priority.get(n, 1000)):
+  #       key = os.path.join(logdir, name)
+  #       fn = os.path.join(path, name)
+  #       # skip files already uploaded
+  #       try:
+  #         ctime = os.path.getctime(fn)
+  #         is_uploaded = getxattr(fn, UPLOAD_ATTR_NAME) == UPLOAD_ATTR_VALUE
+  #       except OSError:
+  #         cloudlog.event("uploader_getxattr_failed", key=key, fn=fn)
+  #         # deleter could have deleted, so skip
+  #         continue
+  #       if is_uploaded:
+  #         continue
 
-        # limit uploading on metered connections
-        if metered:
-          dt = datetime.timedelta(hours=12)
-          if logdir in self.immediate_folders and (datetime.datetime.now() - datetime.datetime.fromtimestamp(ctime)) < dt:
-            continue
+  #       # limit uploading on metered connections
+  #       if metered:
+  #         dt = datetime.timedelta(hours=12)
+  #         if logdir in self.immediate_folders and (datetime.datetime.now() - datetime.datetime.fromtimestamp(ctime)) < dt:
+  #           continue
 
-          if name == "qcamera.ts" and not any(logdir.startswith(r.split('|')[-1]) for r in requested_routes):
-            continue
+  #         if name == "qcamera.ts" and not any(logdir.startswith(r.split('|')[-1]) for r in requested_routes):
+  #           continue
 
-        yield name, key, fn
+  #       yield name, key, fn
 
-  def next_file_to_upload(self, metered: bool) -> tuple[str, str, str] | None:
-    upload_files = list(self.list_upload_files(metered))
+  # def next_file_to_upload(self, metered: bool) -> tuple[str, str, str] | None:
+  #   upload_files = list(self.list_upload_files(metered))
 
-    for name, key, fn in upload_files:
-      if any(f in fn for f in self.immediate_folders):
-        return name, key, fn
+  #   for name, key, fn in upload_files:
+  #     if any(f in fn for f in self.immediate_folders):
+  #       return name, key, fn
 
-    for name, key, fn in upload_files:
-      if name in self.immediate_priority:
-        return name, key, fn
+  #   for name, key, fn in upload_files:
+  #     if name in self.immediate_priority:
+  #       return name, key, fn
 
-    return None
+  #   return None
 
   def do_upload(self, key: str, fn: str):
     url_resp = self.api.get("v1.4/" + self.dongle_id + "/upload_url/", timeout=10, path=key, access_token=self.api.get_token())
@@ -162,54 +162,54 @@ class Uploader:
       if stream:
         stream.close()
 
-  def upload(self, name: str, key: str, fn: str, network_type: int, metered: bool) -> bool:
-    try:
-      sz = os.path.getsize(fn)
-    except OSError:
-      cloudlog.exception("upload: getsize failed")
-      return False
+  # def upload(self, name: str, key: str, fn: str, network_type: int, metered: bool) -> bool:
+  #   try:
+  #     sz = os.path.getsize(fn)
+  #   except OSError:
+  #     cloudlog.exception("upload: getsize failed")
+  #     return False
 
-    cloudlog.event("upload_start", key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
+  #   cloudlog.event("upload_start", key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
 
-    if sz == 0:
-      # tag files of 0 size as uploaded
-      success = True
-    elif name in MAX_UPLOAD_SIZES and sz > MAX_UPLOAD_SIZES[name]:
-      cloudlog.event("uploader_too_large", key=key, fn=fn, sz=sz)
-      success = True
-    else:
-      start_time = time.monotonic()
+  #   if sz == 0:
+  #     # tag files of 0 size as uploaded
+  #     success = True
+  #   elif name in MAX_UPLOAD_SIZES and sz > MAX_UPLOAD_SIZES[name]:
+  #     cloudlog.event("uploader_too_large", key=key, fn=fn, sz=sz)
+  #     success = True
+  #   else:
+  #     start_time = time.monotonic()
 
-      stat = None
-      last_exc = None
-      try:
-        stat = self.do_upload(key, fn)
-      except Exception as e:
-        last_exc = (e, traceback.format_exc())
+  #     stat = None
+  #     last_exc = None
+  #     try:
+  #       stat = self.do_upload(key, fn)
+  #     except Exception as e:
+  #       last_exc = (e, traceback.format_exc())
 
-      if stat is not None and stat.status_code in (200, 201, 401, 403, 412):
-        self.last_filename = fn
-        dt = time.monotonic() - start_time
-        if stat.status_code == 412:
-          cloudlog.event("upload_ignored", key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
-        else:
-          content_length = int(stat.request.headers.get("Content-Length", 0))
-          speed = (content_length / 1e6) / dt
-          cloudlog.event("upload_success", key=key, fn=fn, sz=sz, content_length=content_length,
-                         network_type=network_type, metered=metered, speed=speed)
-        success = True
-      else:
-        success = False
-        cloudlog.event("upload_failed", stat=stat, exc=last_exc, key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
+  #     if stat is not None and stat.status_code in (200, 201, 401, 403, 412):
+  #       self.last_filename = fn
+  #       dt = time.monotonic() - start_time
+  #       if stat.status_code == 412:
+  #         cloudlog.event("upload_ignored", key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
+  #       else:
+  #         content_length = int(stat.request.headers.get("Content-Length", 0))
+  #         speed = (content_length / 1e6) / dt
+  #         cloudlog.event("upload_success", key=key, fn=fn, sz=sz, content_length=content_length,
+  #                        network_type=network_type, metered=metered, speed=speed)
+  #       success = True
+  #     else:
+  #       success = False
+  #       cloudlog.event("upload_failed", stat=stat, exc=last_exc, key=key, fn=fn, sz=sz, network_type=network_type, metered=metered)
 
-    if success:
-      # tag file as uploaded
-      try:
-        setxattr(fn, UPLOAD_ATTR_NAME, UPLOAD_ATTR_VALUE)
-      except OSError:
-        cloudlog.event("uploader_setxattr_failed", exc=last_exc, key=key, fn=fn, sz=sz)
+  #   if success:
+  #     # tag file as uploaded
+  #     try:
+  #       setxattr(fn, UPLOAD_ATTR_NAME, UPLOAD_ATTR_VALUE)
+  #     except OSError:
+  #       cloudlog.event("uploader_setxattr_failed", exc=last_exc, key=key, fn=fn, sz=sz)
 
-    return success
+  #   return success
 
 
   def step(self, network_type: int, metered: bool) -> bool | None:

@@ -198,30 +198,30 @@ class TestAthenadMethods:
     resp = athenad._do_upload(item)
     assert resp.status_code == 201
 
-  def test_upload_file_to_url(self, host):
-    fn = self._create_file('qlog.zst')
+  # def test_upload_file_to_url(self, host):
+  #   fn = self._create_file('qlog.zst')
 
-    resp = dispatcher["uploadFileToUrl"]("qlog.zst", f"{host}/qlog.zst", {})
-    assert resp['enqueued'] == 1
-    assert 'failed' not in resp
-    assert {"path": fn, "url": f"{host}/qlog.zst", "headers": {}}.items() <= resp['items'][0].items()
-    assert resp['items'][0].get('id') is not None
-    assert athenad.upload_queue.qsize() == 1
+  #   resp = dispatcher["uploadFileToUrl"]("qlog.zst", f"{host}/qlog.zst", {})
+  #   assert resp['enqueued'] == 1
+  #   assert 'failed' not in resp
+  #   assert {"path": fn, "url": f"{host}/qlog.zst", "headers": {}}.items() <= resp['items'][0].items()
+  #   assert resp['items'][0].get('id') is not None
+  #   assert athenad.upload_queue.qsize() == 1
 
-  def test_upload_file_to_url_duplicate(self, host):
-    self._create_file('qlog.zst')
+  # def test_upload_file_to_url_duplicate(self, host):
+  #   self._create_file('qlog.zst')
 
-    url1 = f"{host}/qlog.zst?sig=sig1"
-    dispatcher["uploadFileToUrl"]("qlog.zst", url1, {})
+  #   url1 = f"{host}/qlog.zst?sig=sig1"
+  #   dispatcher["uploadFileToUrl"]("qlog.zst", url1, {})
 
-    # Upload same file again, but with different signature
-    url2 = f"{host}/qlog.zst?sig=sig2"
-    resp = dispatcher["uploadFileToUrl"]("qlog.zst", url2, {})
-    assert resp == {'enqueued': 0, 'items': []}
+  #   # Upload same file again, but with different signature
+  #   url2 = f"{host}/qlog.zst?sig=sig2"
+  #   resp = dispatcher["uploadFileToUrl"]("qlog.zst", url2, {})
+  #   assert resp == {'enqueued': 0, 'items': []}
 
-  def test_upload_file_to_url_does_not_exist(self, host):
-    not_exists_resp = dispatcher["uploadFileToUrl"]("does_not_exist.zst", "http://localhost:1238", {})
-    assert not_exists_resp == {'enqueued': 0, 'items': [], 'failed': ['does_not_exist.zst']}
+  # def test_upload_file_to_url_does_not_exist(self, host):
+  #   not_exists_resp = dispatcher["uploadFileToUrl"]("does_not_exist.zst", "http://localhost:1238", {})
+  #   assert not_exists_resp == {'enqueued': 0, 'items': [], 'failed': ['does_not_exist.zst']}
 
   @with_upload_handler
   def test_upload_handler(self, host):

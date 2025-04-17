@@ -68,6 +68,6 @@ class AzureContainer:
     blob.upload_blob(data, overwrite=overwrite)
     return self.BASE_URL + blob_name
 
-  def upload_file(self, path: str | os.PathLike, blob_name: str, overwrite=False) -> str:
-    with open(path, "rb") as f:
-      return self.upload_bytes(f, blob_name, overwrite)
+  # def upload_file(self, path: str | os.PathLike, blob_name: str, overwrite=False) -> str:
+  #   with open(path, "rb") as f:
+  #     return self.upload_bytes(f, blob_name, overwrite)

@@ -32,26 +32,26 @@ class GithubUtils:
     else:
       return r
 
-  def upload_file(self, bucket, path, file_name):
-    with open(path, "rb") as f:
-      encoded = base64.b64encode(f.read()).decode()
+  # def upload_file(self, bucket, path, file_name):
+  #   with open(path, "rb") as f:
+  #     encoded = base64.b64encode(f.read()).decode()
 
-      # check if file already exists
-      sha = self.get_file_sha(bucket, file_name)
-      sha = f'"sha":"{sha}",' if sha else ''
+  #     # check if file already exists
+  #     sha = self.get_file_sha(bucket, file_name)
+  #     sha = f'"sha":"{sha}",' if sha else ''
 
-      data = f'{{"message":"uploading {file_name}", \
-                    "branch":"{bucket}", \
-                    "committer":{{"name":"Vehicle Researcher", "email": "user@comma.ai"}}, \
-                    {sha} \
-                    "content":"{encoded}"}}'
-      github_path = f"contents/{file_name}"
-      self.api_call(github_path, data=data, method=HTTPMethod.PUT, data_call=True)
+  #     data = f'{{"message":"uploading {file_name}", \
+  #                   "branch":"{bucket}", \
+  #                   "committer":{{"name":"Vehicle Researcher", "email": "user@comma.ai"}}, \
+  #                   {sha} \
+  #                   "content":"{encoded}"}}'
+  #     github_path = f"contents/{file_name}"
+  #     self.api_call(github_path, data=data, method=HTTPMethod.PUT, data_call=True)
 
-  def upload_files(self, bucket, files):
-    self.create_bucket(bucket)
-    for file_name,path in files:
-      self.upload_file(bucket, path, file_name)
+  # def upload_files(self, bucket, files):
+  #   self.create_bucket(bucket)
+  #   for file_name,path in files:
+  #     self.upload_file(bucket, path, file_name)
 
   def create_bucket(self, bucket):
     if self.get_bucket_sha(bucket):
@@ -101,7 +101,7 @@ class GithubUtils:
 
   # upload files to github and comment them on the pr
   def comment_images_on_pr(self, title, commenter, pr_branch, bucket, images):
-    self.upload_files(bucket, images)
+    # self.upload_files(bucket, images)
     table = [f'<details><summary>{title}</summary><table>']
     for i,f in enumerate(images):
       if not (i % 2):

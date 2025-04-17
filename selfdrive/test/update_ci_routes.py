@@ -19,17 +19,17 @@ SOURCES: list[AzureContainer] = [
 
 DEST = OpenpilotCIContainer
 
-def upload_route(path: str, exclude_patterns: Iterable[str] = None) -> None:
-  if exclude_patterns is None:
-    exclude_patterns = [r'dcamera\.hevc']
+# def upload_route(path: str, exclude_patterns: Iterable[str] = None) -> None:
+#   if exclude_patterns is None:
+#     exclude_patterns = [r'dcamera\.hevc']
 
-  r, n = path.rsplit("--", 1)
-  r = '/'.join(r.split('/')[-2:])  # strip out anything extra in the path
-  destpath = f"{r}/{n}"
-  for file in os.listdir(path):
-    if any(re.search(pattern, file) for pattern in exclude_patterns):
-      continue
-    DEST.upload_file(os.path.join(path, file), f"{destpath}/{file}")
+#   r, n = path.rsplit("--", 1)
+#   r = '/'.join(r.split('/')[-2:])  # strip out anything extra in the path
+#   destpath = f"{r}/{n}"
+#   for file in os.listdir(path):
+#     if any(re.search(pattern, file) for pattern in exclude_patterns):
+#       continue
+#     DEST.upload_file(os.path.join(path, file), f"{destpath}/{file}")
 
 
 def sync_to_ci_public(route: str) -> bool:
