@@ -1034,10 +1034,6 @@ This may take up to a minute.</source>
         <translation>Zeige die Geschwindigkeit in km/h anstatt von mph.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Fahrerkamera aufnehmen und hochladen</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Lade Daten der Fahreraufmerksamkeitsüberwachungskamera hoch, um die Fahreraufmerksamkeitsüberwachungsalgorithmen zu verbessern.</translation>
     </message>

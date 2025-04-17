@@ -1031,10 +1031,6 @@ This may take up to a minute.</source>
         <translation>啟用後，速度單位顯示將從 mp/h 改為 km/h。</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>記錄並上傳駕駛監控影像</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>上傳駕駛監控的錄影來協助我們提升駕駛監控的準確率。</translation>
     </message>

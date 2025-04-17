@@ -1038,10 +1038,6 @@ Cela peut prendre jusqu&apos;à une minute.</translation>
         <translation>Recevez des alertes pour revenir dans la voie lorsque votre véhicule dérive au-delà d&apos;une ligne de voie détectée sans clignotant activé en roulant à plus de 31 mph (50 km/h).</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Enregistrer et télécharger la caméra conducteur</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Publiez les données de la caméra orientée vers le conducteur et aidez à améliorer l&apos;algorithme de surveillance du conducteur.</translation>
     </message>

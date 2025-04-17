@@ -1027,10 +1027,6 @@ This may take up to a minute.</source>
         <translation>Hızı mph yerine km/h şeklinde görüntüleyin.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Sürücü kamerasını kayıt et.</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Sürücüye bakan kamera verisini yükleyin ve Cihazın algoritmasını geliştirmemize yardımcı olun.</translation>
     </message>

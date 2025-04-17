@@ -1031,10 +1031,6 @@ This may take up to a minute.</source>
         <translation>แสดงความเร็วเป็น กม./ชม. แทน ไมล์/ชั่วโมง</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>บันทึกและอัปโหลดภาพจากกล้องคนขับ</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>อัปโหลดข้อมูลจากกล้องที่หันหน้าไปทางคนขับ และช่วยปรับปรุงอัลกอริธึมการตรวจสอบผู้ขับขี่</translation>
     </message>

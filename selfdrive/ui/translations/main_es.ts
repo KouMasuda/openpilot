@@ -1048,10 +1048,6 @@ Esto puede tardar un minuto.</translation>
         <translation>Habilitar el monitoreo del conductor incluso cuando Openpilot no esté activado.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Grabar y Subir Cámara del Conductor</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Subir datos de la cámara del conductor para ayudar a mejorar el algoritmo de monitoreo del conductor.</translation>
     </message>

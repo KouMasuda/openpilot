@@ -1036,10 +1036,6 @@ Isso pode levar até um minuto.</translation>
         <translation>Exibir velocidade em km/h invés de mph.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Gravar e Upload Câmera Motorista</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Upload dados da câmera voltada para o motorista e ajude a melhorar o algoritmo de monitoramentor.</translation>
     </message>

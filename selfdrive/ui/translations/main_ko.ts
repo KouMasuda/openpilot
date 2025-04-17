@@ -1031,10 +1031,6 @@ This may take up to a minute.</source>
         <translation>mph 대신 km/h로 속도를 표시합니다.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>운전자 카메라 녹화 및 업로드</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>운전자 카메라의 영상 데이터를 업로드하여 운전자 모니터링 알고리즘을 개선합니다.</translation>
     </message>

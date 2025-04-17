@@ -1003,10 +1003,6 @@ nie zostało ustawione</translation>
         <translation>Wyświetl prędkość w km/h zamiast mph.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>Nagraj i prześlij nagranie z kamery kierowcy</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>Prześlij dane z kamery skierowanej na kierowcę i pomóż poprawiać algorytm monitorowania kierowcy.</translation>
     </message>

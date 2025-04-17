@@ -1031,10 +1031,6 @@ This may take up to a minute.</source>
         <translation>速度は mph ではなく km/h で表示されます。</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>車内カメラの録画とアップロード</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>車内カメラの映像をアップロードし、ドライバー監視システムのアルゴリズムの向上に役立てます。</translation>
     </message>

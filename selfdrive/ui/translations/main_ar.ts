@@ -1056,10 +1056,6 @@ This may take up to a minute.</source>
         <translation>عرض السرعة بواحدات كم/سا بدلاً من ميل/سا.</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>تسجيل وتحميل كاميرا السائق</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>تحميل البيانات من الكاميرا المواجهة للسائق، والمساعدة في تحسين خوارزمية مراقبة السائق.</translation>
     </message>

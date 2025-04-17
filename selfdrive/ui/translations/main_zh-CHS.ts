@@ -1031,10 +1031,6 @@ This may take up to a minute.</source>
         <translation>显示车速时，以km/h代替mph。</translation>
     </message>
     <message>
-        <source>Record and Upload Driver Camera</source>
-        <translation>录制并上传驾驶员摄像头</translation>
-    </message>
-    <message>
         <source>Upload data from the driver facing camera and help improve the driver monitoring algorithm.</source>
         <translation>上传驾驶员摄像头的数据，帮助改进驾驶员监控算法。</translation>
     </message>
